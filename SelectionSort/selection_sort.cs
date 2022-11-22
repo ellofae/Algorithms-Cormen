@@ -28,3 +28,7 @@ class Program {
     }
   }
 }
+
+// Best-case: O(n^2)
+// Worst-case: O(n^2)
+// Finding min value is: sum from i to (n-1) = j which means n(n-1)/2 for each cases;
