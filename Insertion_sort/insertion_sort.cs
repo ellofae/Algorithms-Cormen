@@ -29,3 +29,6 @@ namespace ConsoleApp1
         }
     }
 }
+
+// Best-case O(n)
+// Worst-case O(n^2): while loop is sigma from 0 to (n-1) = j, which means n(n-1)/2 times.
