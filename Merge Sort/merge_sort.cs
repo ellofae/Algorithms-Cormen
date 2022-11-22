@@ -8,6 +8,31 @@ that replaces the current subarray A[p..r].
 
 Since we perform at most n basic steps, merging takes O(n) time
 where n = r - p + 1 is the total number of elements being merged
+
+It takes time T(n/b) to solve one subproblem of size n=b (where b is 2 in merge sort).
+So it takes aT(n/b) to solve a of them (where a is 2 in merge sort).
+
+If we take D(n) time to divide the problem into subproblems and C(n) time to combine the solutions
+to the subproblems into the solution to the original problem. We get the recurrence:
+
+T(n) = { O(1), if n <= c,
+       { aT(n/b) + D(n) + C(n) otherwise.
+       
+       
+Merge sort on just one element takes constant time. When we have n>1 elements, we break down the running time as follows.
+
+ - Divide: The divide step just computes the middle of the subarray, which takes
+   constant time. Thus, D(n)=O(1).
+ - Conquer: We recursively solve two subproblems, each of size n=2, which contributes 2T(n/2) to the running time.
+ - Combine: We have already noted that the MERGE procedure on an n-element
+   subarray takes time O(n), and so C(n)=O(n).
+ 
+ Adding D(n)=O(1) and C(n)=O(n), we get a sum that is a linear function of n, that is, O(n).
+ Adding it to the 2T(n/2) term gives the recurrence for the WORST-CASE running time T(n):
+ 
+ T(n) = { O(1), if n = 1,
+        { 2T(n/2) + O(n), if n > 1.
+ 
 */
 
 using System;
