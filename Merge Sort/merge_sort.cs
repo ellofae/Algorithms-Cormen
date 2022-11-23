@@ -46,56 +46,58 @@ class Program
 {
     static void Main(string[] args)
     {
-        int[] arr = new int[] { 5, 2, 4, 7, 1, 3, 2, 6 };
+        int[] arr = new int[] {15, 12, 95, 34, 61, 52, 90, 73 };
+        Console.WriteLine("Initial array: ");
+        foreach (var i in arr)
+            Console.Write(i + " ");
+        Console.WriteLine();
+
         MergeSort(arr, 0, arr.Length);
 
-        foreach (int i in arr)
-            Console.Write(i.ToString() + " ");
+        Console.WriteLine("\n\nSorted array: ");
+        foreach (var i in arr)
+            Console.Write(i + " ");
     }
-
-    public static void MergeSort(int[] A, int p, int r)
+    public static void MergeSort(int[] A, int start, int end)
     {
-        if (p < r)
+        if(end - start != 1)
         {
-            int q = (p + r) / 2;
-            MergeSort(A, p, q);
-            MergeSort(A, q+1, r);
-            Merge(A, p, q, r);
+            int middle = (int)Math.Floor((decimal)(start + end) / 2);
+            MergeSort(A, start, middle); // 0 (1) 2 -> 0 2     ->  0 1  and 1 2    so, that's the reason (end-start != 1)
+            MergeSort(A, middle, end); // 2 (3) 4 -> 2 4       ->  2 3  and 3 4
+            Merge(A, start, middle, end); 
         }
     }
 
-    public static void Merge(int[] A, int p, int q, int r)
+    public static void Merge(int[] A, int start, int middle, int end)
     {
-        int n1 = q - p;
-        int n2 = r - q;
-        int[] L = new int[n1 + 1];
-        int[] R = new int[n2 + 1];
+        List<int> L = new List<int>();
+        List<int> R = new List<int>();
 
+        for (int i = start; i < middle; i++)
+            L.Add(A[i]);
+        for (int j = middle; j < end; j++)
+            R.Add(A[j]);
 
-        for (int i = 0; i < n1; i++)
-            L[i] = A[p + i];
-        for (int i = 0; i < n2; i++)
-            R[i] = A[q + i];
+        L.Add(int.MaxValue);
+        R.Add(int.MaxValue);
 
-        L[n1] = int.MaxValue;
-        R[n2] = int.MaxValue;
+        int leftIndex = 0;
+        int rightIndex = 0;
 
-        int i1 = 0;
-        int j1 = 0;
-        for(int k = p; k < r; k++)
+        for (int k = start; k < end; k++)
         {
-            if (L[i1] <= R[j1])
+            if (L[leftIndex] <= R[rightIndex])
             {
-                A[k] = L[i1];
-                i1 = i1 + 1;
+                A[k] = L[leftIndex];
+                leftIndex += 1;
             }
             else
             {
-                A[k] = R[j1];
-                j1 = j1 + 1;
+                A[k] = R[rightIndex];
+                rightIndex += 1;
             }
         }
-
     }
-
 }
+
