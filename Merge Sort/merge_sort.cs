@@ -33,6 +33,11 @@ Merge sort on just one element takes constant time. When we have n>1 elements, w
  T(n) = { O(1), if n = 1,
         { 2T(n/2) + O(n), if n > 1.
  
+ To compute the total cost represented by the recurrence (2.2), we simply add up
+the costs of all the levels. The recursion tree has lg (n) + 1 levels, each costing cn,
+for a total cost of cn(lg(n) + 1), each costing cn for a total cost of cn(lg(n) + 1) = cn*log(n) + cn
+Ignoring the low-order term and the constant c gives the desired result of O(n*lg(n))
+ 
 */
 
 using System;
